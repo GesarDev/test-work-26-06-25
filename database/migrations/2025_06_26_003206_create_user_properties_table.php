@@ -15,7 +15,20 @@ return new class extends Migration
     {
         Schema::create('user_properties', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->enum('key', ['email', 'phone']);
+            $table->string('value');
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
+            $table->index(['user_id']);
+            $table->index(['key']);
+            $table->index(['user_id', 'key']);
+            $table->index(['key', 'value']);
         });
     }
 

@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
+            $table->string('title', 255);
+            $table->string('description', 255);
+            $table->integer('pages_count');
+            $table->addColumn('binary', 'rowid', ['length' => 16]);
             $table->timestamps();
         });
     }
